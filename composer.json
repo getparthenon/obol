@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php-http/discovery": "^1.41",
+    "php-http/discovery": "^1.14",
     "psr/http-client": "^1.0",
     "psr/http-message": "^1.0"
   },
