@@ -12,12 +12,19 @@ declare(strict_types=1);
  * On the date above, in accordance with the Business Source License, use of this software will be governed by the open source license specified in the LICENSE file.
  */
 
-namespace Obol;
+namespace Obol\Model;
 
-use Obol\Model\CheckoutCreation;
-use Obol\Model\Subscription;
-
-interface HostedCheckoutService
+class CustomerCreation
 {
-    public function createCheckoutForSubscription(Subscription $subscription): CheckoutCreation;
+    protected string $id;
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
 }
