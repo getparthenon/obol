@@ -14,10 +14,14 @@ declare(strict_types=1);
 
 namespace Obol;
 
+use Obol\Exception\ProviderFailureException;
 use Obol\Model\CreatePrice;
 use Obol\Model\PriceCreation;
 
 interface PriceServiceInterface
 {
+    /**
+     * @throws ProviderFailureException
+     */
     public function createPrice(CreatePrice $createPrice): PriceCreation;
 }
