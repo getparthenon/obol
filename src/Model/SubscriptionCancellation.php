@@ -18,8 +18,6 @@ class SubscriptionCancellation
 {
     private Subscription $subscription;
 
-    private ?Refund $refund = null;
-
     public function getSubscription(): Subscription
     {
         return $this->subscription;
@@ -28,20 +26,5 @@ class SubscriptionCancellation
     public function setSubscription(Subscription $subscription): void
     {
         $this->subscription = $subscription;
-    }
-
-    public function getRefund(): ?Refund
-    {
-        return $this->refund;
-    }
-
-    public function setRefund(?Refund $refund): void
-    {
-        $this->refund = $refund;
-    }
-
-    public function hasRefund()
-    {
-        return isset($this->refund);
     }
 }
