@@ -12,12 +12,8 @@ declare(strict_types=1);
  * On the date above, in accordance with the Business Source License, use of this software will be governed by the open source license specified in the LICENSE file.
  */
 
-namespace Obol;
+namespace Obol\Model\Events;
 
-use Obol\Model\Events\EventInterface;
-use Obol\Model\WebhookPayload;
-
-interface WebhookServiceInterface
+class ChargeUpdated extends AbstractCharge implements EventInterface
 {
-    public function process(WebhookPayload $payload): ?EventInterface;
 }

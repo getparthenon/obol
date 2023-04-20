@@ -14,65 +14,6 @@ declare(strict_types=1);
 
 namespace Obol\Model\Events;
 
-class DisputeCreation
+class DisputeCreation extends AbstractDispute implements EventInterface
 {
-    private string $disputedPaymentId;
-
-    private string $reason;
-
-    private \DateTimeInterface $createdAt;
-
-    private int $amount;
-
-    private string $currency;
-
-    public function getDisputedPaymentId(): string
-    {
-        return $this->disputedPaymentId;
-    }
-
-    public function setDisputedPaymentId(string $disputedPaymentId): void
-    {
-        $this->disputedPaymentId = $disputedPaymentId;
-    }
-
-    public function getReason(): string
-    {
-        return $this->reason;
-    }
-
-    public function setReason(string $reason): void
-    {
-        $this->reason = $reason;
-    }
-
-    public function getCreatedAt(): \DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    public function getAmount(): int
-    {
-        return $this->amount;
-    }
-
-    public function setAmount(int $amount): void
-    {
-        $this->amount = $amount;
-    }
-
-    public function getCurrency(): string
-    {
-        return $this->currency;
-    }
-
-    public function setCurrency(string $currency): void
-    {
-        $this->currency = $currency;
-    }
 }
