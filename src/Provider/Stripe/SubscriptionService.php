@@ -74,6 +74,7 @@ class SubscriptionService implements SubscriptionServiceInterface
         $subscription->setSeats($subscriptionItem->quantity);
         $subscription->setStoredPaymentReference($stripeSubscription->default_source);
         $subscription->setCustomerReference($stripeSubscription->customer);
+        $subscription->setStatus($stripeSubscription->status);
 
         $createdAt = new \DateTime();
         $createdAt->setTimestamp($subscriptionItem->created);
@@ -82,6 +83,10 @@ class SubscriptionService implements SubscriptionServiceInterface
         $validUntil = new \DateTime();
         $validUntil->setTimestamp($stripeSubscription->current_period_end);
         $subscription->setValidUntil($validUntil);
+
+        $currentPeriodStart = new \DateTime();
+        $currentPeriodStart->setTimestamp($stripeSubscription->current_period_start);
+        $subscription->setStartOfCurrentPeriod($currentPeriodStart);
 
         return $subscription;
     }
