@@ -55,4 +55,28 @@ class RefundService implements RefundServiceInterface
             throw new ProviderFailureException($exception->getMessage(), previous: $exception);
         }
     }
+
+    public function list(int $limit = 10, ?string $lastId = null): array
+    {
+        $payload = ['limit' => $limit];
+        if (isset($lastId) && !empty($lastId)) {
+            $payload['starting_after'] = $lastId;
+        }
+
+        $result = $this->stripe->refunds->all($payload);
+        $output = [];
+        foreach ($result->data as $stripeRefund) {
+            $refund = new Refund();
+            $refund->setId($stripeRefund->id);
+            $refund->setAmount($stripeRefund->amount);
+            $refund->setCurrency($stripeRefund->currency);
+            $refund->setPaymentId($stripeRefund->charge);
+            $createdAt = new \DateTime();
+            $createdAt->setTimestamp($stripeRefund->created);
+            $refund->setCreatedAt($createdAt);
+            $output[] = $refund;
+        }
+
+        return $output;
+    }
 }
