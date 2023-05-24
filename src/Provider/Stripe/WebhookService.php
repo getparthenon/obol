@@ -21,6 +21,7 @@ use Obol\Model\Events\ChargeSucceeded;
 use Obol\Model\Events\DisputeClosed;
 use Obol\Model\Events\DisputeCreation;
 use Obol\Model\Events\EventInterface;
+use Obol\Model\Webhook\WebhookCreation;
 use Obol\Model\WebhookPayload;
 use Obol\Provider\ProviderInterface;
 use Obol\WebhookServiceInterface;
@@ -44,6 +45,18 @@ class WebhookService implements WebhookServiceInterface
         $this->provider = $provider;
         $this->config = $config;
         $this->stripe = $stripe ?? new StripeClient($this->config->getApiKey());
+    }
+
+    public function registerWebhook(string $url, array $events, string $description = null): WebhookCreation
+    {
+        $stripeResult = $this->stripe->webhookEndpoints->create(['url' => $url, 'enabled_events' => $events, 'description' => $description]);
+
+        $webhookCreation = new WebhookCreation();
+        $webhookCreation->setId($stripeResult->id);
+        $webhookCreation->setDescription($stripeResult->description);
+        $webhookCreation->setEvents($stripeResult->enabled_events);
+
+        return $webhookCreation;
     }
 
     public function process(WebhookPayload $payload): ?EventInterface
