@@ -293,7 +293,7 @@ class PaymentService implements PaymentServiceInterface
             $json = $exception->getJsonBody();
             $declineCode = $json['failure_code'] ?? null;
 
-            $this->getLogger()->warning('Got a card decline response from stripe for charge card', ['decline_code' => $declineCode]);
+            $this->getLogger()->warning('Got a card decline response from stripe for charge card', ['decline_code' => $declineCode, 'json' => $json]);
             $charge = new ChargeCardResponse();
             $charge->setSuccessful(false);
             $reason = match ($declineCode) {
